@@ -27,9 +27,29 @@
             <div v-if="msg.Human" class="message human-message">
               <strong>我：</strong> {{ msg.Human }}
             </div>
-            <div v-else-if="msg.AI" class="message ai-message">
+            <!-- <div v-else-if="msg.AI" class="message ai-message">
               <strong>AI：</strong> {{ msg.AI }}
+            </div> -->
+            <div v-else-if="msg.AI" class="message ai-message">
+              <div style="display: flex; align-items: flex-start;">
+                <strong style="margin-right: 5px;">AI：</strong>
+                <div>
+                  <div v-if="msg.AI.includes('--------------------')">
+                    <!-- 主内容 -->
+                    <span>{{ msg.AI.split('--------------------')[0] }}</span>
+                    <!-- 参考资料部分 -->
+                    <div style="font-size: 14px; color: gray; margin-top: 5px;">
+                      {{ msg.AI.split('--------------------')[1] }}
+                    </div>
+                  </div>
+                  <div v-else>
+                    <span>{{ msg.AI }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
+
+
           </div>
         </div>
         
@@ -147,7 +167,7 @@ export default {
 .el-main {
   color: #333;
   text-align: center;
-  height: calc(85vh - 100px);
+  height: calc(90vh - 75px);
 }
 .chat-message {
   margin: 10px 10px;
